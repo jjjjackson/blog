@@ -1,23 +1,59 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Starter - Dimension V2',
-    author: 'Hunter Chang',
-    description: 'A Gatsby.js V2 Starter based on Dimension by HTML5 UP',
+    title: 'gatsby-starter-typescript-plus',
+    description: 'A starter kit for TypeScript-based Gatsby projects with sensible defaults.',
+    keywords: 'gatsbyjs, gatsby, javascript, sample, something',
+    siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com',
+    author: {
+      name: 'Resi Respati',
+      url: 'https://twitter.com/resir014',
+      email: 'resir014@gmail.com',
+    },
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
-        start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
-        display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+        name: 'blog',
+        path: `${__dirname}/src/blog`,
+        ignore: process.env.NODE_ENV === `production` && [`**/draft-*`], // Ignore the file during build
       },
     },
-    'gatsby-plugin-sass',
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: [
+          {
+            resolve: 'gatsby-remark-responsive-iframe',
+            options: {
+              wrapperStyle: 'margin-bottom: 1rem',
+            },
+          },
+          'gatsby-remark-prismjs',
+          'gatsby-remark-copy-linked-files',
+          'gatsby-remark-smartypants',
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 1140,
+              quality: 90,
+              linkImagesToOriginal: false,
+            },
+          },
+        ],
+      },
+    },
+    'gatsby-transformer-json',
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com',
+      },
+    },
+    'gatsby-plugin-styled-components',
+    'gatsby-plugin-typescript',
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-react-helmet',
   ],
 }

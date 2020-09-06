@@ -1,0 +1,37 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": ["eslint-config-blvd/react", "prettier/@typescript-eslint", "prettier/react", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "react/no-unescaped-entities": [
+      "error",
+      {
+        "forbid": [
+          { "char": ">", "alternatives": ["&gt;"] },
+          { "char": "}", "alternatives": ["&#125;"] }
+        ]
+      }
+    ]
+  }
+}
